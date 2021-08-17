@@ -23,8 +23,8 @@ def encrypting():
     
 
     def save_results(*results):
-        key_text=''
-        with open('key_text','w',encoding='utf-8') as f:
+        
+        with open('key_text.txt','a',encoding='utf-8') as f:
             f.write(results[0]+'\n'+results[1])
             
         Label(enc_root,text='Data Saved!!').pack()
@@ -51,10 +51,18 @@ def encrypting():
             
             
             cipher_text=list(text[::-1])
+            
+            if '\n' in cipher_text:
+                cipher_text.remove('\n')
+            
             for i in range(len(cipher_text)):
                 
                 new_char=ord(cipher_text[i])+mag
-                cipher_text[i]=chr(new_char)
+                try:
+                    cipher_text[i]=chr(new_char)
+                except:
+                    Label(enc_root,text='UNKNOWN ERROR RECEIVED! TRY AGAIN PLZ!').pack()
+                    
                 
             cipher_text=''.join(cipher_text)
 
